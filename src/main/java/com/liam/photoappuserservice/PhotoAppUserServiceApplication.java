@@ -5,6 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 
+// DiscoveryClient is more generalized but should work for everything
 //@EnableDiscoveryClient
 @SpringBootApplication
 @EnableEurekaClient
