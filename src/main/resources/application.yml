@@ -12,6 +12,16 @@ spring:
          enabled: true
          settings:
             web-allow-others: true
+   datasource:
+      url: jdbc:h2:mem:53c8c1a8-b21d-422a-8862-b1aefcecad97
+      driverClassName: org.h2.Driver
+      username: sa
+      password: 1
+   jpa:
+      database-platform: org.hibernate.dialect.H2Dialect
+      hibernate:
+         ddl-auto: update
+
 eureka:
   client:
     register-with-eureka: true
