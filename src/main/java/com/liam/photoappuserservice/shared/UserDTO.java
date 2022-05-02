@@ -2,8 +2,18 @@ package com.liam.photoappuserservice.shared;
 
 import java.io.Serializable;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 
+@Entity
+@Table(name="users")
 public class UserDTO implements Serializable {
 	
 
@@ -12,19 +22,24 @@ public class UserDTO implements Serializable {
 	 */
 	private static final long serialVersionUID = -2167092540681747836L;
 
-
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
 
+	@NotBlank
+	@Size(min=2)
 	private String firstName;
 	
-
+	@NotBlank
+	@Size(min=2)
 	private String lastName;
 	
-
+	@Email
 	private String email;
 	
-
+	@NotBlank
+	@Size(min=2)
 	private String password;
 	
 	private String encryptedPassword;
