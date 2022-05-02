@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.liam.photoappuserservice.models.User;
 import com.liam.photoappuserservice.services.UserService;
+import com.liam.photoappuserservice.shared.UserDTO;
 
 @RestController
 @RequestMapping("/api/users")
@@ -36,7 +37,7 @@ public class MainController {
 	
 	
 	@PostMapping("/create")
-	public User createUser(@Valid @RequestBody User newUser) {
+	public UserDTO createUser(@Valid @RequestBody UserDTO newUser) {
 		
 		return userServ.createUser(newUser);
 	}

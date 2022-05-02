@@ -5,10 +5,10 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.liam.photoappuserservice.models.User;
+import com.liam.photoappuserservice.shared.UserDTO;
 
 @Repository
-public interface UserRepository extends JpaRepository<User, Long> {
+public interface UserRepository extends JpaRepository<UserDTO, Long> {
 
-	List<User> findAll();
+	List<UserDTO> findAll();
 }
