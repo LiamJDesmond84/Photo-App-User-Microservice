@@ -2,15 +2,17 @@ package com.liam.photoappuserservice.shared;
 
 import java.io.Serializable;
 
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+
+
 
 
 @Entity
@@ -23,6 +25,15 @@ public class UserDTO implements Serializable {
 	 */
 	private static final long serialVersionUID = -2167092540681747836L;
 
+
+	
+//	@Id
+//	@GeneratedValue(generator = "UUID")
+//	@GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
+//	@Type(type = "org.hibernate.type.UUIDCharType")
+//	@Column(length = 36, columnDefinition = "varchar(36)", updatable = false, nullable = false)
+//	private UUID id;
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -43,13 +54,13 @@ public class UserDTO implements Serializable {
 	@NotBlank
 	@Size(min=2)
 
+	@Column(nullable = false, length = 120, unique = true)
 	private String password;
 	
-	@Column(nullable = false, unique = true)
-	private String userId;
-	
-	@Column(nullable = false, unique = true)
-	private String encryptedPassword;
+
+
+
+
 
 	public Long getId() {
 		return id;
@@ -91,23 +102,7 @@ public class UserDTO implements Serializable {
 		this.password = password;
 	}
 	
-	
 
-	public String getUserId() {
-		return userId;
-	}
-
-	public void setUserId(String userId) {
-		this.userId = userId;
-	}
-
-	public String getEncryptedPassword() {
-		return encryptedPassword;
-	}
-
-	public void setEncryptedPassword(String encryptedPassword) {
-		this.encryptedPassword = encryptedPassword;
-	}
 	
 	
 	
