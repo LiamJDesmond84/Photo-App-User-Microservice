@@ -2,6 +2,7 @@ package com.liam.photoappuserservice.shared;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -27,21 +28,27 @@ public class UserDTO implements Serializable {
 	private Long id;
 	
 
-	@NotBlank
-	@Size(min=2)
+
+	@Column(nullable = false, length = 50)
 	private String firstName;
 	
-	@NotBlank
-	@Size(min=2)
+
+	@Column(nullable = false, length = 50)
 	private String lastName;
 	
-	@Email
+
+	@Column(nullable = false, length = 120, unique = true)
 	private String email;
 	
 	@NotBlank
 	@Size(min=2)
+
 	private String password;
 	
+	@Column(nullable = false, unique = true)
+	private String userId;
+	
+	@Column(nullable = false, unique = true)
 	private String encryptedPassword;
 
 	public Long getId() {
@@ -82,6 +89,16 @@ public class UserDTO implements Serializable {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	
+	
+
+	public String getUserId() {
+		return userId;
+	}
+
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
 
 	public String getEncryptedPassword() {
