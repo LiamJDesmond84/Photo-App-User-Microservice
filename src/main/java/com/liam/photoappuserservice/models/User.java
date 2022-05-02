@@ -25,7 +25,6 @@ public class User {
 	String email;
 
 	public User() {
-
 	}
 
 	public Long getId() {
