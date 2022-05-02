@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.liam.photoappuserservice.models.User;
+
 import com.liam.photoappuserservice.services.UserService;
 import com.liam.photoappuserservice.shared.UserDTO;
 
