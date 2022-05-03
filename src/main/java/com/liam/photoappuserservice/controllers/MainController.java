@@ -5,13 +5,15 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.env.Environment;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-
+import com.liam.photoappuserservice.models.User;
 import com.liam.photoappuserservice.services.UserService;
 import com.liam.photoappuserservice.shared.UserDTO;
 
@@ -37,9 +39,10 @@ public class MainController {
 	
 	
 	@PostMapping("/create")
-	public UserDTO createUser(@Valid @RequestBody UserDTO newUser) {
+	public ResponseEntity<User> createUser(@Valid @RequestBody UserDTO newUser) {
+		userServ.createUser(newUser);
 		
-		return userServ.createUser(newUser);
+		return new ResponseEntity<User>(HttpStatus.CREATED);
 	}
 
 }

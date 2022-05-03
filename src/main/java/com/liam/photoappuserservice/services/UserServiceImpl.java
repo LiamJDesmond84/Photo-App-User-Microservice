@@ -3,6 +3,7 @@ package com.liam.photoappuserservice.services;
 import org.apache.commons.lang.builder.ReflectionToStringBuilder;
 
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Service;
 
 import com.liam.photoappuserservice.models.User;
@@ -11,6 +12,8 @@ import com.liam.photoappuserservice.shared.UserDTO;
 
 @Service
 public class UserServiceImpl implements UserService {
+	
+//	BCryptPasswordEncoder bCrypt;
 	
 	public UserServiceImpl() {}
 	

@@ -19,18 +19,19 @@ public class User {
 	private Long id;
 	
 	@NotBlank
-	@Size(min=2)
+	@Size(min=2, message="First Name Required")
 	private String firstName;
 	
 	@NotBlank
-	@Size(min=2)
+	@Size(min=2, message="Last Name Required")
 	private String lastName;
 	
 	@Email
+	@NotBlank(message="Email Required")
 	private String email;
 	
 	@NotBlank
-	@Size(min=2)
+	@Size(min=2, message="Password Required")
 	private String password;
 
 	public User() {
