@@ -44,11 +44,11 @@ public class MainController {
 		
 		UserDTO createdUser = userServ.createUser(newUser);
 		
-		System.out.println(newUser);
+
 		System.out.println(ReflectionToStringBuilder.toString(createdUser));
-		return new ResponseEntity<UserDTO>(createdUser, HttpStatus.CREATED);
+//		return new ResponseEntity<UserDTO>(createdUser, HttpStatus.CREATED);
 		
-//		return ResponseEntity.status(HttpStatus.CREATED).body(newUser);
+		return ResponseEntity.status(HttpStatus.CREATED).body(createdUser);
 	}
 
 }
