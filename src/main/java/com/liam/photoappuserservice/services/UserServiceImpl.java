@@ -20,17 +20,16 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public UserDTO createUser(UserDTO newUser) {
 		User user = new User();
-		user.setFirstName(newUser.getFirstName());
-		user.setLastName(newUser.getLastName());
-		user.setEmail(newUser.getEmail());
-		user.setPassword(newUser.getPassword());
+		user = UserMapper.INSTANCE.destinationToSource(newUser);
 		
-//		UserDTO userDTO = UserMapper.INSTANCE.tDto(null);
+		UserDTO userDTO = UserMapper.INSTANCE.sourceToDestination(user);
 
 		System.out.println(ReflectionToStringBuilder.toString(user));
-		System.out.println(ReflectionToStringBuilder.toString(newUser));
+		System.out.println(ReflectionToStringBuilder.toString(userDTO));
+		userRepo.save(user);
+//		UserDTO user = UserMapper.INSTANCE.destinationToSource(userDTO);
 
-		return userRepo.save(newUser);
+		return userDTO;
 	}
 
 }
