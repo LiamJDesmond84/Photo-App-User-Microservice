@@ -2,6 +2,7 @@ package com.liam.photoappuserservice.controllers;
 
 import javax.validation.Valid;
 
+import org.apache.commons.lang.builder.ReflectionToStringBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.env.Environment;
@@ -41,10 +42,11 @@ public class MainController {
 	@PostMapping("/create")
 	public ResponseEntity<UserDTO> createUser(@Valid @RequestBody UserDTO newUser) {
 		
-		userServ.createUser(newUser);
+		UserDTO createdUser = userServ.createUser(newUser);
 		
 		System.out.println(newUser);
-		return new ResponseEntity<UserDTO>(newUser, HttpStatus.CREATED);
+		System.out.println(ReflectionToStringBuilder.toString(createdUser));
+		return new ResponseEntity<UserDTO>(createdUser, HttpStatus.CREATED);
 		
 //		return ResponseEntity.status(HttpStatus.CREATED).body(newUser);
 	}
