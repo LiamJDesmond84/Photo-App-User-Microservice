@@ -1,6 +1,7 @@
 package com.liam.photoappuserservice.models;
 
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -28,6 +29,7 @@ public class User {
 	
 	@Email
 	@NotBlank(message="Email Required")
+	@Column(nullable = false, length = 120, unique = true)
 	private String email;
 	
 	@NotBlank
