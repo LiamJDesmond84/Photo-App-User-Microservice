@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
@@ -39,21 +40,23 @@ public class UserDTO implements Serializable {
 	private Long id;
 	
 
-
+	@NotBlank
+	@Size(min=2, message="First Name Required")
 	@Column(nullable = false, length = 50)
 	private String firstName;
 	
-
+	@NotBlank
+	@Size(min=2, message="Last Name Required")
 	@Column(nullable = false, length = 50)
 	private String lastName;
 	
-
+	@Email
+	@NotBlank(message="Email Required")
 	@Column(nullable = false, length = 120, unique = true)
 	private String email;
 	
 	@NotBlank
-	@Size(min=2)
-
+	@Size(min=2, message="Password Required")
 	@Column(nullable = false, length = 120, unique = true)
 	private String password;
 	

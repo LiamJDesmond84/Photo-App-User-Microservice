@@ -39,10 +39,10 @@ public class MainController {
 	
 	
 	@PostMapping("/create")
-	public ResponseEntity<User> createUser(@Valid @RequestBody UserDTO newUser) {
+	public ResponseEntity<UserDTO> createUser(@Valid @RequestBody UserDTO newUser) {
 		userServ.createUser(newUser);
 		
-		return new ResponseEntity<User>(HttpStatus.CREATED);
+		return new ResponseEntity<UserDTO>(HttpStatus.CREATED);
 	}
 
 }
