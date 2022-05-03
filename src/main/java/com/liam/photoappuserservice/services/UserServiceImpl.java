@@ -25,12 +25,15 @@ public class UserServiceImpl implements UserService {
 		User user = new User();
 		user = UserMapper.INSTANCE.destinationToSource(newUser);
 		
-		UserDTO userDTO = UserMapper.INSTANCE.sourceToDestination(user);
+		
 
-		System.out.println(ReflectionToStringBuilder.toString(user));
-		System.out.println(ReflectionToStringBuilder.toString(userDTO));
-		userRepo.save(user);
+
+//		System.out.println(ReflectionToStringBuilder.toString(userDTO));
+		User createdUser = userRepo.save(user);
+
 //		UserDTO user = UserMapper.INSTANCE.destinationToSource(userDTO);
+		UserDTO userDTO = UserMapper.INSTANCE.sourceToDestination(createdUser);
+		System.out.println(ReflectionToStringBuilder.toString(userDTO));
 
 		return userDTO;
 	}

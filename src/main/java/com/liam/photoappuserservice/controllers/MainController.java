@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.liam.photoappuserservice.models.User;
+
 import com.liam.photoappuserservice.services.UserService;
 import com.liam.photoappuserservice.shared.UserDTO;
 
@@ -40,9 +40,13 @@ public class MainController {
 	
 	@PostMapping("/create")
 	public ResponseEntity<UserDTO> createUser(@Valid @RequestBody UserDTO newUser) {
+		
 		userServ.createUser(newUser);
 		
-		return new ResponseEntity<UserDTO>(HttpStatus.CREATED);
+		System.out.println(newUser);
+		return new ResponseEntity<UserDTO>(newUser, HttpStatus.CREATED);
+		
+//		return ResponseEntity.status(HttpStatus.CREATED).body(newUser);
 	}
 
 }
