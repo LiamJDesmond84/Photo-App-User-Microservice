@@ -1,11 +1,16 @@
 package com.liam.photoappuserservice.services;
 
+import java.util.ArrayList;
+
 import org.apache.commons.lang.builder.ReflectionToStringBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.liam.photoappuserservice.models.User;
+import com.liam.photoappuserservice.models.UserEntity;
 import com.liam.photoappuserservice.repositories.UserRepository;
 import com.liam.photoappuserservice.shared.UserDTO;
 
@@ -22,7 +27,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public UserDTO createUser(UserDTO newUser) {
-		User user = new User();
+		UserEntity user = new UserEntity();
 		user = UserMapper.INSTANCE.destinationToSource(newUser);
 		
 		// Encrypting password
@@ -30,13 +35,24 @@ public class UserServiceImpl implements UserService {
 
 
 //		System.out.println(ReflectionToStringBuilder.toString(userDTO));
-		User createdUser = userRepo.save(user);
+		UserEntity createdUser = userRepo.save(user);
 
 //		UserDTO user = UserMapper.INSTANCE.destinationToSource(userDTO);
 		UserDTO userDTO = UserMapper.INSTANCE.sourceToDestination(createdUser);
 		System.out.println(ReflectionToStringBuilder.toString(userDTO));
 
 		return userDTO;
+	}
+
+	@Override
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+
+		UserEntity user = userRepo.findByEmail(username);
+		
+		if(user == null) throw new UsernameNotFoundException(username);
+		
+		
+		return new User(user.getEmail(), user.getPassword(), true, true, true, true, new ArrayList<>());
 	}
 
 }

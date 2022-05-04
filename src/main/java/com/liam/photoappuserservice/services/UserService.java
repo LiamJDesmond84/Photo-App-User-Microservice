@@ -6,7 +6,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 
 import com.liam.photoappuserservice.shared.UserDTO;
 
-
+// UserDetailsService comes from Spring Framework & is used in WebSecurity class
 public interface UserService extends UserDetailsService{
 	
 	public UserDTO createUser(UserDTO newUser);

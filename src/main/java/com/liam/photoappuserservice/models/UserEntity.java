@@ -11,9 +11,11 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
+
+
 @Entity
 @Table(name="users")
-public class User {
+public class UserEntity {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,7 +38,7 @@ public class User {
 	@Size(min=2, message="Password Required")
 	private String password;
 
-	public User() {
+	public UserEntity() {
 	}
 
 	public Long getId() {
