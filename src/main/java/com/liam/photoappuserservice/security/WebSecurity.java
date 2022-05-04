@@ -5,14 +5,25 @@ package com.liam.photoappuserservice.security;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
+import com.liam.photoappuserservice.services.UserService;
 
 
 @Configuration
 @EnableWebSecurity
 public class WebSecurity extends WebSecurityConfigurerAdapter {
+	
+	
+	@Autowired
+	private UserService userServ;
+	
+	@Autowired
+	private BCryptPasswordEncoder bCrypt;
 	
 	@Autowired
 	private Environment env;
@@ -42,6 +53,11 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
 			// authenticationManager comes from Spring Security and we used getAuthenticationManager to call it in one of our AuthenticationFilter methods to use it here
 		authenticationFilter.setAuthenticationManager(authenticationManager());
 		return authenticationFilter;
+	}
+	
+	@Override
+	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+		auth.userDetailsService(userServ).passwordEncoder(bCrypt);
 	}
 
 }
