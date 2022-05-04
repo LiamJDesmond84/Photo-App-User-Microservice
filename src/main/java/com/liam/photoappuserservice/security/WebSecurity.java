@@ -1,6 +1,6 @@
 package com.liam.photoappuserservice.security;
 
-import javax.servlet.Filter;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -28,7 +28,7 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
 		// Only allows requests from certain IP addresses(API-Gatway in this example)
 		httpSec.authorizeRequests().antMatchers("/**").hasIpAddress(env.getProperty("gateway.ip"))
 		.and()
-		// Registering our custom AuthenticationFilter(same package) & adding method
+		// Registering our custom AuthenticationFilter(same package) with below method
 		.addFilter(getAuthenticationFilter());
 		
 		// Allows H-2 Console.
@@ -36,8 +36,10 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
 		
 	}
 
+	// custom AuthenticationFilter from same package
 	private AuthenticationFilter getAuthenticationFilter() throws Exception {
 		AuthenticationFilter authenticationFilter = new AuthenticationFilter();
+			// authenticationManager comes from Spring Security and we used getAuthenticationManager to call it in one of our AuthenticationFilter methods to use it here
 		authenticationFilter.setAuthenticationManager(authenticationManager());
 		return authenticationFilter;
 	}
