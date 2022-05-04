@@ -3,8 +3,11 @@ package com.liam.photoappuserservice.security;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.servlet.FilterChain;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.sql.rowset.serial.SerialException;
 
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -23,11 +26,17 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter{
 			 UserLogin creds = new ObjectMapper()
 					 .readValue(request.getInputStream(), UserLogin.class);
 			 
-			 return getAuthenticationManager().authenticate(new UsernamePasswordAuthenticationToken(creds.getEmail(), creds.getPassword(), new ArrayList<>()));
+			 return getAuthenticationManager()
+					 .authenticate(new UsernamePasswordAuthenticationToken(creds.getEmail(), creds.getPassword(), new ArrayList<>()));
 		 }
 		 catch (IOException e) {
 			throw new RuntimeException(e);
 		}
 	 }
+	
+	@Override
+	protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication auth) throws IOException, ServletException {
+		
+	}
 
 }
