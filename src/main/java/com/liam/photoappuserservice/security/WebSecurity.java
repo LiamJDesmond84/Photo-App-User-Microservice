@@ -1,5 +1,7 @@
 package com.liam.photoappuserservice.security;
 
+import javax.servlet.Filter;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
@@ -24,11 +26,20 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
 //		httpSec.authorizeRequests().antMatchers("/api/users/**").permitAll();
 		
 		// Only allows requests from certain IP addresses(API-Gatway in this example)
-		httpSec.authorizeRequests().antMatchers("/**").hasIpAddress(env.getProperty("gateway.ip"));
+		httpSec.authorizeRequests().antMatchers("/**").hasIpAddress(env.getProperty("gateway.ip"))
+		.and()
+		// Registering our custom AuthenticationFilter(same package) & adding method
+		.addFilter(getAuthenticationFilter());
 		
 		// Allows H-2 Console.
 		httpSec.headers().frameOptions().disable();
 		
+	}
+
+	private AuthenticationFilter getAuthenticationFilter() throws Exception {
+		AuthenticationFilter authenticationFilter = new AuthenticationFilter();
+		authenticationFilter.setAuthenticationManager(authenticationManager());
+		return authenticationFilter;
 	}
 
 }
