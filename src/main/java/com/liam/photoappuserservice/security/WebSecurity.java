@@ -51,6 +51,7 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
 	private AuthenticationFilter getAuthenticationFilter() throws Exception {
 		AuthenticationFilter authenticationFilter = new AuthenticationFilter(userServ, env, authenticationManager());
 		// Still needs USER-SERVICE???  I don't think so.
+		// Custom User Authentication URL - Dude says to set it in the application.properties(yml) file & not hardcode it.  But this is fine for now.
 		authenticationFilter.setFilterProcessesUrl("/api/users/login");
 			// authenticationManager comes from Spring Security and we used getAuthenticationManager to call it in one of our AuthenticationFilter methods to use it here
 		
