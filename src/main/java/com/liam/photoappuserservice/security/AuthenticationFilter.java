@@ -64,10 +64,14 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter{
 		UserDTO userDTO = userServ.getUserDetailsByEmail(userName);
 		
 		String token = Jwts.builder()
+				// setSubject can be any String I think.  We change ID to String here.  So maybe change it back at some point.
 				.setSubject(userDTO.getId())
 				.setExpiration(new Date(System.currentTimeMillis() + Long.parseLong(env.getProperty("token.expiration_time"))))
 				.signWith(SignatureAlgorithm.HS512, env.getProperty("token.secret"))
 				.compact();
+		
+		response.addHeader("token", token);
+		response.addHeader("id", userDTO.getId());
 		
 	}
 
