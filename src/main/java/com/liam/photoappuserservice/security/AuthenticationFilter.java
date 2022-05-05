@@ -34,6 +34,7 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter{
 		}
 	 }
 	
+	// Generate JWT Token and add it to HTTP response header after successful login for re-use within the application
 	@Override
 	protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication auth) throws IOException, ServletException {
 		
