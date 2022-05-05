@@ -55,4 +55,18 @@ public class UserServiceImpl implements UserService {
 		return new User(user.getEmail(), user.getPassword(), true, true, true, true, new ArrayList<>());
 	}
 
+	@Override
+	public UserDTO getUserDetailsByEmail(String email) {
+		UserEntity user = userRepo.findByEmail(email);
+		
+		if(user == null) throw new UsernameNotFoundException(email);
+		
+		UserDTO userDTO = UserMapper.INSTANCE.sourceToDestination(user);
+		
+		return userDTO;
+	}
+	
+	
+	
+
 }

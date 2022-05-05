@@ -49,11 +49,13 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
 
 	// custom AuthenticationFilter from same package
 	private AuthenticationFilter getAuthenticationFilter() throws Exception {
-		AuthenticationFilter authenticationFilter = new AuthenticationFilter();
+		AuthenticationFilter authenticationFilter = new AuthenticationFilter(userServ, env, authenticationManager());
 		// Still needs USER-SERVICE???  I don't think so.
 		authenticationFilter.setFilterProcessesUrl("/api/users/login");
 			// authenticationManager comes from Spring Security and we used getAuthenticationManager to call it in one of our AuthenticationFilter methods to use it here
-		authenticationFilter.setAuthenticationManager(authenticationManager());
+		
+		// Now in new AuthenticationFilter line above
+//		authenticationFilter.setAuthenticationManager(authenticationManager());
 		return authenticationFilter;
 	}
 	
