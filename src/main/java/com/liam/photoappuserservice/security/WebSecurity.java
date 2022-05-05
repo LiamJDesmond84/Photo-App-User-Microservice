@@ -33,13 +33,15 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
 		
 		
 		httpSec.csrf().disable();
+		// ALLOW requests from these URLs
 //		httpSec.authorizeHttpRequests().antMatchers("/api/users/**").permitAll();
 //		httpSec.authorizeRequests().antMatchers("/api/users/**").permitAll();
 		
-		// Only allows requests from certain IP addresses(API-Gatway in this example)
+		// ONLY ALLOWS requests from certain IP addresses(API-Gatway in this example)
 		httpSec.authorizeRequests().antMatchers("/**").hasIpAddress(env.getProperty("gateway.ip"))
 		.and()
-		// Registering our custom AuthenticationFilter(same package) with below method
+		
+		// Registering our custom AuthenticationFilter(same package) with getAuthenticationFilter(){} method below
 		.addFilter(getAuthenticationFilter());
 		
 		// Allows H-2 Console.
@@ -50,13 +52,18 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
 	// custom AuthenticationFilter from same package
 	private AuthenticationFilter getAuthenticationFilter() throws Exception {
 		AuthenticationFilter authenticationFilter = new AuthenticationFilter(userServ, env, authenticationManager());
+		
 		// Still needs USER-SERVICE???  I don't think so.
 		// Custom User Authentication URL - Dude says to set it in the application.properties(yml) file & not hardcode it.  But this is fine for now.
 		authenticationFilter.setFilterProcessesUrl("/api/users/login");
-			// authenticationManager comes from Spring Security and we used getAuthenticationManager to call it in one of our AuthenticationFilter methods to use it here
+
 		
-		// Now in new AuthenticationFilter line above
-//		authenticationFilter.setAuthenticationManager(authenticationManager());
+		//--- Now in new AuthenticationFilter line above
+			// authenticationManager comes from Spring Security and we used getAuthenticationManager to call it in one of our AuthenticationFilter methods to use it here
+//			authenticationFilter.setAuthenticationManager(authenticationManager());
+		//---
+		
+		
 		return authenticationFilter;
 	}
 	
