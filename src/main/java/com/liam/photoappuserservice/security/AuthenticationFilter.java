@@ -2,6 +2,7 @@ package com.liam.photoappuserservice.security;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -21,6 +22,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.liam.photoappuserservice.models.UserLogin;
 import com.liam.photoappuserservice.services.UserService;
 import com.liam.photoappuserservice.shared.UserDTO;
+
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 
 public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter{
 	
@@ -58,6 +62,12 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter{
 		
 		String userName = ((User) auth.getPrincipal()).getUsername();
 		UserDTO userDTO = userServ.getUserDetailsByEmail(userName);
+		
+		String token = Jwts.builder()
+				.setSubject(userDTO.getId())
+				.setExpiration(new Date(System.currentTimeMillis() + Long.parseLong(env.getProperty("token.expiration_time"))))
+				.signWith(SignatureAlgorithm.HS512, env.getProperty("token.secret"))
+				.compact();
 		
 	}
 
