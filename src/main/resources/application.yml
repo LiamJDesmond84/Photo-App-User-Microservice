@@ -2,6 +2,9 @@ server:
    port: 0
    
 spring:
+   # Instead of bootstrap.yml
+   config:
+      import: "optional:configserver:http://localhost:8888"
    application:
       name: USER-SERVICE
    devtools:
@@ -22,9 +25,7 @@ spring:
       hibernate:
          ddl-auto: update
          
-   # Instead of bootstrap.yml
-   config:
-      import: optional:configserver:http://localhost:8888
+
 
 eureka:
   client:
