@@ -21,6 +21,10 @@ spring:
       database-platform: org.hibernate.dialect.H2Dialect
       hibernate:
          ddl-auto: update
+         
+   # Instead of bootstrap.yml
+   config:
+      import: optional:configserver:http://localhost:8888
 
 eureka:
   client:
