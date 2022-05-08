@@ -34,7 +34,7 @@ public class MainController {
 	
 	@GetMapping("/status/check")
 	public String status() {
-		return "Working on port " + env.getProperty("local.server.port") + " & App name is: " + appName;
+		return "Working on port " + env.getProperty("local.server.port") + " & App name is: " + appName + " Secret Key: " + env.getProperty("token.secret");
 	}
 	
 	
