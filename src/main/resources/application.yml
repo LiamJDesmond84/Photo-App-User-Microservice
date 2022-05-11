@@ -55,6 +55,13 @@ token:
    expiration_time: 864000000
    secret: heyN0w619
    
+# For actuator
+management:
+   endpoints:
+      web:
+         exposure:
+            include: mappings   
+   
 # For actuator refresh posts - Doesn't work outside of Config Server - ?
 #management:
 #   endpoints:
