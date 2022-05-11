@@ -2,6 +2,8 @@ server:
    port: 0
    
 spring:
+
+   # Profile for USER-SERVICE.yml/properties in GitHub Config Repo
    profiles:
       active: USER-SERVICE
    # Instead of bootstrap.yml
@@ -53,4 +55,9 @@ token:
    expiration_time: 864000000
    secret: heyN0w619
    
-   
+# For actuator refresh posts - Doesn't work outside of Config Server - ?
+#management:
+#   endpoints:
+#      web:
+#         exposure:
+#            include: busrefresh   
