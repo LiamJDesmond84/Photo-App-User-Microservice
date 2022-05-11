@@ -38,7 +38,9 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
 //		httpSec.authorizeRequests().antMatchers("/api/users/**").permitAll();
 		
 		// ONLY ALLOWS requests from certain IP addresses(API-Gatway in this example)
-		httpSec.authorizeRequests().antMatchers("/**").hasIpAddress(env.getProperty("gateway.ip"))
+		httpSec.authorizeRequests()
+		.antMatchers("/USER-SERVICE/actuator/**").permitAll()
+		.antMatchers("/**").hasIpAddress(env.getProperty("gateway.ip"))
 		.and()
 		
 		// Registering our custom AuthenticationFilter(same package) with getAuthenticationFilter(){} method below
