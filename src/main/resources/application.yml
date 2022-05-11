@@ -2,6 +2,8 @@ server:
    port: 0
    
 spring:
+   profiles:
+      active: USER-SERVICE
    # Instead of bootstrap.yml
    config:
       import: "optional:configserver:http://localhost:8888"
