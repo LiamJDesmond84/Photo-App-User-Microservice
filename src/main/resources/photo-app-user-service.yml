@@ -1,0 +1,4 @@
+token:
+   # 10 days
+   expiration_time: 8640000002
+   secret: heyN0w619
