@@ -2,7 +2,10 @@ server:
    port: 0
    
 spring:
-
+   jpa:
+      database-platform: org.hibernate.dialect.H2Dialect
+      hibernate:
+         ddl-auto: update
    # Profile for USER-SERVICE.yml/properties in GitHub Config Repo
    profiles:
       active: USER-SERVICE
@@ -14,20 +17,19 @@ spring:
    devtools:
       restart:
          enabled: true
+   # H2 Database
    h2:
       console:
          enabled: true
          settings:
             web-allow-others: true
+   # H2 Console
    datasource:
       url: jdbc:h2:mem:testdb
       driverClassName: org.h2.Driver
       username: sa
       password: 1
-   jpa:
-      database-platform: org.hibernate.dialect.H2Dialect
-      hibernate:
-         ddl-auto: update
+
          
    rabbitmq:
      host: localhost
@@ -47,6 +49,7 @@ eureka:
       prefer-ip-address: true
       instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
     
+# IPV4 Address(Preferred)
 gateway:
    ip: 192.168.1.186
    
@@ -54,7 +57,7 @@ token:
    # 10 days
    expiration_time: 864000000
    secret: heyN0w619
-   
+
 # For actuator
 management:
    endpoints:
