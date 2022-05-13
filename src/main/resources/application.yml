@@ -2,10 +2,11 @@ server:
    port: 0
    
 spring:
-   jpa:
-      database-platform: org.hibernate.dialect.H2Dialect
-      hibernate:
-         ddl-auto: update
+    # H2 JPA
+#   jpa:
+#      database-platform: org.hibernate.dialect.H2Dialect
+#      hibernate:
+#         ddl-auto: update
    # Profile for USER-SERVICE.yml/properties in GitHub Config Repo
    profiles:
       active: USER-SERVICE
