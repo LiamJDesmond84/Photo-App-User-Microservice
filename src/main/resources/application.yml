@@ -17,18 +17,18 @@ spring:
    devtools:
       restart:
          enabled: true
-   # H2 Database
+   # H2 Console
    h2:
       console:
          enabled: true
          settings:
             web-allow-others: true
-   # H2 Console
-   datasource:
-      url: jdbc:h2:mem:testdb
-      driverClassName: org.h2.Driver
-      username: sa
-      password: 1
+   # H2 Database
+#   datasource:
+#      url: jdbc:h2:mem:testdb
+#      driverClassName: org.h2.Driver
+#      username: sa
+#      password: 1
 
          
    rabbitmq:
