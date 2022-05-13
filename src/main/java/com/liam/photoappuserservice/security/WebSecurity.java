@@ -32,6 +32,8 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity httpSec) throws Exception {
 		
 		
+
+		
 		httpSec.csrf().disable();
 		// ALLOW requests from these URLs
 //		httpSec.authorizeHttpRequests().antMatchers("/api/users/**").permitAll();
@@ -39,9 +41,10 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
 		
 		// ONLY ALLOWS requests from certain IP addresses(API-Gatway in this example)
 		httpSec.authorizeRequests()
-		.antMatchers("/USER-SERVICE/actuator/**").permitAll() // Not working
+		.antMatchers("/USER-SERVICE/actuator/**").permitAll() // Not working - Maybe now?
 		.antMatchers("/api/users/actuator/**").permitAll() // Not working
 		.antMatchers("/**").hasIpAddress(env.getProperty("gateway.ip"))
+		.antMatchers("/h2-console/**").permitAll()
 		.and()
 		
 		// Registering our custom AuthenticationFilter(same package) with getAuthenticationFilter(){} method below
