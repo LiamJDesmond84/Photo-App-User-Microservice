@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
 
 import com.liam.photoappuserservice.models.UserEntity;
 import com.liam.photoappuserservice.models.UserResponseModel;
@@ -27,6 +28,9 @@ public class MainController {
 	
 	@Autowired
 	private UserService userServ;
+	
+	@Autowired
+	private RestTemplate restTemplate;
 	
 	@Value("${spring.application.name}")
 	private String appName;
