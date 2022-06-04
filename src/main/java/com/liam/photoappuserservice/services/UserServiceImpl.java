@@ -65,6 +65,14 @@ public class UserServiceImpl implements UserService {
 		
 		return userDTO;
 	}
+
+	@Override
+	public UserDTO getUser(Long userId) {
+		UserEntity user = userRepo.findById(userId).orElseGet(null);
+		
+		UserDTO userDTO = UserMapper.INSTANCE.sourceToDestination(user);
+		return userDTO;
+	}
 	
 	
 	

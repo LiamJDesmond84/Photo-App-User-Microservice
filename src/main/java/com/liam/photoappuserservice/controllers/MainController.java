@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.liam.photoappuserservice.models.UserEntity;
 import com.liam.photoappuserservice.models.UserResponseModel;
+import com.liam.photoappuserservice.services.UserMapper;
 import com.liam.photoappuserservice.services.UserService;
 import com.liam.photoappuserservice.shared.UserDTO;
 
@@ -52,7 +54,13 @@ public class MainController {
 		return ResponseEntity.status(HttpStatus.CREATED).body(createdUser);
 	}
 	
-	public ResponseEntity<UserResponseModel> getUser(@PathVariable("userId") String userId) {
+	public ResponseEntity<UserEntity> getUser(@PathVariable("userId") Long userId) {
+		
+		UserDTO userDTO = userServ.getUser(userId);
+		
+		UserEntity user = UserMapper.INSTANCE.destinationToSource(userDTO);
+		
+		
 		
 		
 		return ResponseEntity.status(HttpStatus.OK).body(user);
