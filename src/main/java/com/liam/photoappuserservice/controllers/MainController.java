@@ -1,11 +1,15 @@
 package com.liam.photoappuserservice.controllers;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.apache.commons.lang.builder.ReflectionToStringBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.core.env.Environment;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
+import com.liam.photoappuserservice.models.AlbumResponseModel;
 import com.liam.photoappuserservice.models.UserEntity;
 import com.liam.photoappuserservice.models.UserResponseModel;
 import com.liam.photoappuserservice.services.UserMapper;
@@ -64,6 +69,15 @@ public class MainController {
 		
 		UserEntity user = UserMapper.INSTANCE.destinationToSource(userDTO);
 		
+		ResponseEntity<List<AlbumResponseModel>> userAlbums = restTemplate.exchange("http://ALBUM-SERVICE/api/users/" + user.getId() + "/users", HttpMethod.GET, null, new ParameterizedTypeReference<List<AlbumResponseModel>>() {
+			
+		});
+		
+		List<AlbumResponseModel> userAlbumsList = userAlbums.getBody();
+		
+		
+		
+		user.setAlbums(userAlbumsList);
 		
 		
 		
