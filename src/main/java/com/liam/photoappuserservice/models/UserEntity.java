@@ -1,6 +1,8 @@
 package com.liam.photoappuserservice.models;
 
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -35,6 +37,8 @@ public class UserEntity {
 	@NotBlank
 	@Size(min=2, message="Password Required")
 	private String password;
+	
+	private List<AlbumResponseModel> albums;
 
 	public UserEntity() {
 	}
@@ -79,7 +83,16 @@ public class UserEntity {
 		this.password = password;
 	}
 
+	public List<AlbumResponseModel> getAlbums() {
+		return albums;
+	}
 
+	public void setAlbums(List<AlbumResponseModel> albums) {
+		this.albums = albums;
+	}
+
+
+	
 	
 	
 	
