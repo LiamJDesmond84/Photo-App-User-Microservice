@@ -66,6 +66,8 @@ public class MainController {
 	@GetMapping("/albums/{userId}")
 	public ResponseEntity<UserResponseModel> getUser(@PathVariable("userId") Long userId) {
 		
+		System.out.println("albums");
+		
 		UserDTO userDTO = userServ.getUser(userId);
 		
 		UserResponseModel user = UserMapper.INSTANCE.destinationToSource1(userDTO);
