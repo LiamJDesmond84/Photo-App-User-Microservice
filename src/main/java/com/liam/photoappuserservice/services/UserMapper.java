@@ -6,6 +6,7 @@ import org.mapstruct.factory.Mappers;
 
 
 import com.liam.photoappuserservice.models.UserEntity;
+import com.liam.photoappuserservice.models.UserResponseModel;
 import com.liam.photoappuserservice.shared.UserDTO;
 
 @Mapper(componentModel = "spring")
@@ -19,6 +20,7 @@ public interface UserMapper {
 	
 	UserDTO sourceToDestination(UserEntity user);
 	UserEntity destinationToSource(UserDTO userDTO);
-//	UserDTO tDto(User user);
 
+	UserResponseModel destinationToSource1(UserDTO userDTO);
+//	UserDTO tDto(User user);
 }

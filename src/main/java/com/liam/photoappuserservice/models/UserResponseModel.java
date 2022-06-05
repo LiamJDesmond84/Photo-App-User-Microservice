@@ -4,7 +4,7 @@ import java.util.List;
 
 public class UserResponseModel {
 	
-	private String userId;
+	private Long userId;
 	
 	private String firstName;
 	
@@ -14,11 +14,11 @@ public class UserResponseModel {
 	
 	private List<AlbumResponseModel> albums;
 
-	public String getUserId() {
+	public Long getUserId() {
 		return userId;
 	}
 
-	public void setUserId(String userId) {
+	public void setUserId(Long userId) {
 		this.userId = userId;
 	}
 
