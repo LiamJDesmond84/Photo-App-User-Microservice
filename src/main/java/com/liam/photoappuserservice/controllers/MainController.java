@@ -63,7 +63,7 @@ public class MainController {
 		return ResponseEntity.status(HttpStatus.CREATED).body(createdUser);
 	}
 	
-	@GetMapping("albums")
+	@GetMapping("albums/{userId}")
 	public ResponseEntity<UserResponseModel> getUser(@PathVariable("userId") Long userId) {
 		
 		UserDTO userDTO = userServ.getUser(userId);
