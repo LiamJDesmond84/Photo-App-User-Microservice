@@ -63,13 +63,14 @@ public class MainController {
 		return ResponseEntity.status(HttpStatus.CREATED).body(createdUser);
 	}
 	
+	@GetMapping("albums")
 	public ResponseEntity<UserResponseModel> getUser(@PathVariable("userId") Long userId) {
 		
 		UserDTO userDTO = userServ.getUser(userId);
 		
 		UserResponseModel user = UserMapper.INSTANCE.destinationToSource1(userDTO);
 		
-		ResponseEntity<List<AlbumResponseModel>> userAlbums = restTemplate.exchange("http://ALBUM-SERVICE/api/users/" + user.getUserId() + "/users", HttpMethod.GET, null, new ParameterizedTypeReference<List<AlbumResponseModel>>() {
+		ResponseEntity<List<AlbumResponseModel>> userAlbums = restTemplate.exchange("http://192.168.1.186:49289/api/users/" + user.getUserId() + "/users", HttpMethod.GET, null, new ParameterizedTypeReference<List<AlbumResponseModel>>() {
 			
 		});
 		
